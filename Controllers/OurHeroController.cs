@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DotNet8WebAPI.Controllers
 {
     [Route("api/[controller]")] //    /api/OurHero
+    [Produces("application/json")]
     [ApiController]
     [Authorize]
     public class OurHeroController : ControllerBase

@@ -2,8 +2,10 @@ using DotNet8WebAPI;
 using DotNet8WebAPI.Helpers;
 using DotNet8WebAPI.Model;
 using DotNet8WebAPI.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +14,23 @@ string connectionString = builder.Configuration.GetConnectionString("OurHeroConn
 
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
-builder.Services.AddDbContext<OurHeroDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Singleton);
+builder.Services.AddDbContext<OurHeroDbContext>(options => options.UseSqlite(connectionString), ServiceLifetime.Singleton);
 
-builder.Services.AddSingleton<IOurHeroService, OurHeroService>();
+//builder.Services.AddIdentity<OurHeroDbContext, IdentityRole>(
+//    options =>
+//        options.Password = new PasswordOptions
+//        {
+//            RequireDigit = true,
+//            RequiredLength = 6,
+//            RequireLowercase = true,
+//            RequireUppercase = true,
+//            RequireNonAlphanumeric = false
+//        });
+
+//builder.Services.AddSingleton<IOurHeroService, OurHeroService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductosService, ProductosService>();
+
 
 
 
@@ -28,8 +43,8 @@ builder.Services.AddSwaggerGen(swagger =>
     swagger.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "JWT Token Authentication API",
-        Description = ".NET 8 Web API"
+        Title = "CotizaHoy API",
+        Description = "VELOZIDEA.NET"
     });
     // To Enable authorization using Swagger (JWT)  
     swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -39,7 +54,7 @@ builder.Services.AddSwaggerGen(swagger =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+        //Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
     });
     swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
@@ -66,11 +81,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<OurHeroDbContext>();
+    context.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
@@ -78,5 +94,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseMiddleware<JwtMiddleware>();
 app.MapControllers();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();

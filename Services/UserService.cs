@@ -21,7 +21,7 @@ namespace DotNet8WebAPI.Services
 
         public async Task<IEnumerable<User>> GetAll()
         {
-            return await db.Users.Where(x => x.isActive == true).ToListAsync();
+            return await db.Users.ToListAsync();
         }
 
         public async Task<User?> GetById(int id)
@@ -49,22 +49,26 @@ namespace DotNet8WebAPI.Services
                 isSuccess = await db.SaveChangesAsync() > 0;
             }
 
+
+
+
             return isSuccess ? userObj : null;
 
         }
 
         public async Task<AuthenticateResponse?> Authenticate(AuthenticateRequest model)
         {
-            var user = await db.Users.SingleOrDefaultAsync(x => x.Username == model.Username && x.Password == model.Password);
+            var user = await db.Users.SingleOrDefaultAsync(x => x.Username == model.Username);
 
-            // return null if user not found
-            if (user == null) return null;
+            if (user != null && BCrypt.Net.BCrypt.Verify(model.Password, user.Password) == true)
+            {
+                var token = await generateJwtToken(user);
 
-            // authentication successful so generate jwt token
-            var token = await generateJwtToken(user);
-
-            return new AuthenticateResponse(user, token);
-
+                return new AuthenticateResponse(user, token);
+            }
+            else            
+            
+                return null;                       
         }
 
         private async Task<string> generateJwtToken(User user)
@@ -77,7 +81,7 @@ namespace DotNet8WebAPI.Services
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
-                    Expires = DateTime.UtcNow.AddDays(7),
+                    Expires = DateTime.UtcNow.AddMinutes(30),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 return tokenHandler.CreateToken(tokenDescriptor);

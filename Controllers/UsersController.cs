@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DotNet8WebAPI.Controllers
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -17,29 +18,33 @@ namespace DotNet8WebAPI.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Get()
-        {
-            return Ok(await _userService.GetAll());
-        }
+        //[HttpGet]
+        //[Authorize]
+        //public async Task<IActionResult> Get()
+        //{
+        //    return Ok(await _userService.GetAll());
+        //}
 
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Post([FromBody] User userObj)
-        {
-            userObj.Id = 0;
-            return Ok(await _userService.AddAndUpdateUser(userObj));
-        }
+        //[HttpPost]
+        //[Authorize]
+        //public async Task<IActionResult> Post([FromBody] User userObj)
+        //{
+        //    userObj.Id = 0;
+        //    userObj.Password = BCrypt.Net.BCrypt.HashPassword(userObj.Password);
 
-        // PUT api/<CustomerController>/5
-        [HttpPut("{id}")]
-        [Authorize]
-        public async Task<IActionResult> Put(int id, [FromBody] User userObj)
-        {
-            userObj.Id = id;
-            return Ok(await _userService.AddAndUpdateUser(userObj));
-        }
+            
+
+        //     return Ok(await _userService.AddAndUpdateUser(userObj));
+        //}
+
+        //// PUT api/<CustomerController>/5
+        //[HttpPut("{id}")]
+        //[Authorize]
+        //public async Task<IActionResult> Put(int id, [FromBody] User userObj)
+        //{
+        //    userObj.Id = id;
+        //    return Ok(await _userService.AddAndUpdateUser(userObj));
+        //}
 
         [HttpPost("login")]
         public async Task<IActionResult> login(AuthenticateRequest model)
@@ -47,7 +52,7 @@ namespace DotNet8WebAPI.Controllers
             var response = await _userService.Authenticate(model);
 
             if (response == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return BadRequest(new { message = "Usuario o contraseña incorrecto" });
 
             return Ok(response);
         }

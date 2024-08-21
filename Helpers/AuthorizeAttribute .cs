@@ -13,8 +13,9 @@ namespace DotNet8WebAPI.Helpers
             var user = (User?)context.HttpContext.Items["User"];
             if (user == null)
             {
-                context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                context.Result = new JsonResult(new { message = "No autorizado" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }
+           
 
         }
     }
