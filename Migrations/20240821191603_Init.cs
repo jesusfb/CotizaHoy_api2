@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DotNet8WebAPI.Migrations
+namespace CotizaHoyAPI.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -34,7 +34,7 @@ namespace DotNet8WebAPI.Migrations
                     FirstName = table.Column<string>(type: "TEXT", nullable: false),
                     LastName = table.Column<string>(type: "TEXT", nullable: false),
                     Username = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     isActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -50,7 +50,7 @@ namespace DotNet8WebAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "LastName", "Password", "Username", "isActive" },
-                values: new object[] { 1, "Jesus", "Figueroa", "$2a$11$VdWXaC9mmuFcCQRyeK23reSMuf65/8VFTm35WpQwnc4hyYYBpYlUC", "jfigueroa.beltran@gmail.com", false });
+                values: new object[] { 1, "Jesus", "Figueroa", "$2a$11$I1btW/n56fVea4oq2sM1I.4JrAqJd3U7SSPqsPQhP5BCyE3d4j6lO", "jfigueroa.beltran@gmail.com", false });
         }
 
         /// <inheritdoc />

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DotNet8WebAPI.Migrations
+namespace CotizaHoyAPI.Migrations
 {
     [DbContext(typeof(OurHeroDbContext))]
     partial class OurHeroDbContextModelSnapshot : ModelSnapshot
@@ -62,6 +62,7 @@ namespace DotNet8WebAPI.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
@@ -81,7 +82,7 @@ namespace DotNet8WebAPI.Migrations
                             Id = 1,
                             FirstName = "Jesus",
                             LastName = "Figueroa",
-                            Password = "$2a$11$VdWXaC9mmuFcCQRyeK23reSMuf65/8VFTm35WpQwnc4hyYYBpYlUC",
+                            Password = "$2a$11$I1btW/n56fVea4oq2sM1I.4JrAqJd3U7SSPqsPQhP5BCyE3d4j6lO",
                             Username = "jfigueroa.beltran@gmail.com",
                             isActive = false
                         });
