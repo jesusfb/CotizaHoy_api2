@@ -1,4 +1,5 @@
 using CotizaHoyAPI.Services.Clientes;
+using CotizaHoyAPI.Services.Cotizaciones;
 using CotizaHoyAPI.Services.Productos;
 using DotNet8WebAPI;
 using DotNet8WebAPI.Helpers;
@@ -33,6 +34,7 @@ builder.Services.AddDbContext<OurHeroDbContext>(options => options.UseSqlite(con
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductosService, ProductosService>();
 builder.Services.AddScoped<IClientesService, ClientesService>();
+builder.Services.AddScoped<ICotizacionesService, CotizacionesService>();
 
 
 

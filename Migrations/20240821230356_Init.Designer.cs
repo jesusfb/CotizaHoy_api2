@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CotizaHoyAPI.Migrations
 {
     [DbContext(typeof(OurHeroDbContext))]
-    [Migration("20240821214313_Init")]
+    [Migration("20240821230356_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -64,6 +64,51 @@ namespace CotizaHoyAPI.Migrations
                             Direccion = "Campo 5",
                             Nombres = "Jesus",
                             Telefono = "6645400921"
+                        });
+                });
+
+            modelBuilder.Entity("DotNet8WebAPI.Model.Cotizaciones", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Cantidad")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("ClienteFk")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("CostoTotal")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Iva")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Precio")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProductoFk")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cotizaciones");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cantidad = 1.0,
+                            ClienteFk = 1,
+                            CostoTotal = 444m,
+                            Fecha = new DateTime(2024, 8, 21, 16, 3, 56, 574, DateTimeKind.Local).AddTicks(5843),
+                            Iva = true,
+                            Precio = 444m,
+                            ProductoFk = 1
                         });
                 });
 
@@ -132,7 +177,7 @@ namespace CotizaHoyAPI.Migrations
                             Id = 1,
                             FirstName = "Jesus",
                             LastName = "Figueroa",
-                            Password = "$2a$11$ACmog4l3E60GUBxou.et8u9vS6UESE6Xxsctyk4D/7ACc2BEpAMLa",
+                            Password = "$2a$11$9Gn7zaih9LkS9isEPl1jyOdSrbvWFvQSYlUPGoxegGjJv6I91jyNS",
                             Username = "jfigueroa.beltran@gmail.com",
                             isActive = false
                         });

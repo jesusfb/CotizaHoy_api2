@@ -14,6 +14,8 @@ namespace DotNet8WebAPI
         public DbSet<User> Users { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Clientes> Clientes { get; set; }
+        public DbSet<Cotizaciones> Cotizaciones { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,7 +23,8 @@ namespace DotNet8WebAPI
             modelBuilder.Entity<Producto>().HasKey(x => x.Id);
             modelBuilder.Entity<User>().HasKey(x => x.Id);
             modelBuilder.Entity<Clientes>().HasKey(x => x.Id);
-
+            modelBuilder.Entity<Cotizaciones>().HasKey(x => x.Id);
+            
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
@@ -52,6 +55,35 @@ namespace DotNet8WebAPI
                   CorreoElectronico = "jfigueroa.beltran@gmail.com",
 
               });
+            modelBuilder.Entity<Cotizaciones>().HasData(
+              new Cotizaciones
+              {
+                  Id = 1,
+                  ClienteFk = 1,
+                  ProductoFk = 1,
+                  Cantidad = 1,
+                  Precio = 444,
+                  CostoTotal = 444,
+                  Iva = true,
+                  Fecha = DateTime.Now
+
+              });
+
+            //modelBuilder.Entity<VAlumnosProgramaPromocion>(entity =>
+            //{
+            //    entity.HasKey(e => e.AlumnoFk)
+            //  .HasName("PRIMARY");
+
+            //    entity.ToView("vAlumnosProgramaPromocion");
+            //    entity.Property(e => e.AlumnoNombre).HasColumnType("mediumtext");
+            //    entity.Property(e => e.CorreoElectronico).HasMaxLength(256);
+            //    entity.Property(e => e.Matricula).HasMaxLength(50);
+            //    entity.Property(e => e.ProgramaNombre).HasColumnType("text");
+            //    entity.Property(e => e.ProgramaNombreCorto).HasColumnType("text");
+            //    entity.Property(e => e.ProgramaPromocionNombre).HasColumnType("text");
+            //    entity.Property(e => e.PromocionNombre).HasColumnType("text");
+            //});
+
         }
 
     }
