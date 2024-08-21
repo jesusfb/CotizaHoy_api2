@@ -17,6 +17,53 @@ namespace CotizaHoyAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
 
+            modelBuilder.Entity("DotNet8WebAPI.Model.Clientes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ApellidoMaterno")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ApellidoPaterno")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nombres")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clientes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ApellidoMaterno = "Figueroa",
+                            ApellidoPaterno = "Figueroa",
+                            CorreoElectronico = "jfigueroa.beltran@gmail.com",
+                            Direccion = "Campo 5",
+                            Nombres = "Jesus",
+                            Telefono = "6645400921"
+                        });
+                });
+
             modelBuilder.Entity("DotNet8WebAPI.Model.Producto", b =>
                 {
                     b.Property<int>("Id")
@@ -82,7 +129,7 @@ namespace CotizaHoyAPI.Migrations
                             Id = 1,
                             FirstName = "Jesus",
                             LastName = "Figueroa",
-                            Password = "$2a$11$I1btW/n56fVea4oq2sM1I.4JrAqJd3U7SSPqsPQhP5BCyE3d4j6lO",
+                            Password = "$2a$11$ACmog4l3E60GUBxou.et8u9vS6UESE6Xxsctyk4D/7ACc2BEpAMLa",
                             Username = "jfigueroa.beltran@gmail.com",
                             isActive = false
                         });

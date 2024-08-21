@@ -1,3 +1,5 @@
+using CotizaHoyAPI.Services.Clientes;
+using CotizaHoyAPI.Services.Productos;
 using DotNet8WebAPI;
 using DotNet8WebAPI.Helpers;
 using DotNet8WebAPI.Model;
@@ -30,6 +32,7 @@ builder.Services.AddDbContext<OurHeroDbContext>(options => options.UseSqlite(con
 //builder.Services.AddSingleton<IOurHeroService, OurHeroService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductosService, ProductosService>();
+builder.Services.AddScoped<IClientesService, ClientesService>();
 
 
 
@@ -95,13 +98,13 @@ app.UseAuthorization();
 app.UseMiddleware<JwtMiddleware>();
 app.MapControllers();
 app.UseSwagger();
-//app.UseSwaggerUI();
+app.UseSwaggerUI();
 
-app.UseSwaggerUI(options =>
-{
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-    options.RoutePrefix = string.Empty;
-});
+//app.UseSwaggerUI(options =>
+//{
+//    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+//    options.RoutePrefix = string.Empty;
+//});
 
 
 app.Run();

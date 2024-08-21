@@ -13,12 +13,14 @@ namespace DotNet8WebAPI
         
         public DbSet<User> Users { get; set; }
         public DbSet<Producto> Productos { get; set; }
+        public DbSet<Clientes> Clientes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         
             modelBuilder.Entity<Producto>().HasKey(x => x.Id);
             modelBuilder.Entity<User>().HasKey(x => x.Id);
+            modelBuilder.Entity<Clientes>().HasKey(x => x.Id);
 
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -38,6 +40,18 @@ namespace DotNet8WebAPI
                    Precio = Convert.ToDecimal(15.00),
                    
                });
+            modelBuilder.Entity<Clientes>().HasData(
+              new Clientes
+              {
+                  Id = 1,
+                  Nombres = "Jesus",
+                  ApellidoPaterno = "Figueroa",
+                  ApellidoMaterno = "Figueroa",
+                  Direccion = "Campo 5",
+                  Telefono = "6645400921",
+                  CorreoElectronico = "jfigueroa.beltran@gmail.com",
+
+              });
         }
 
     }

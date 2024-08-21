@@ -1,4 +1,4 @@
-﻿using CotizaHoyAPI.Services.Productos;
+﻿using CotizaHoyAPI.Services.Clientes;
 using DotNet8WebAPI.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,12 +10,12 @@ namespace DotNet8WebAPI.Controllers
     [Produces("application/json")]
     [ApiController]
     [Authorize]
-    public class ProductosController : ControllerBase
+    public class ClientesController : ControllerBase
     {
         // GET: api/<ProductosController>
-        private readonly IProductosService _Service;
+        private readonly IClientesService _Service;
 
-        public ProductosController(IProductosService heroService)
+        public ClientesController(IClientesService heroService)
         {
             _Service = heroService;
         }

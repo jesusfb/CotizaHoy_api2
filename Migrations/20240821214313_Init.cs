@@ -11,6 +11,24 @@ namespace CotizaHoyAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Clientes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nombres = table.Column<string>(type: "TEXT", nullable: false),
+                    ApellidoPaterno = table.Column<string>(type: "TEXT", nullable: false),
+                    ApellidoMaterno = table.Column<string>(type: "TEXT", nullable: false),
+                    Direccion = table.Column<string>(type: "TEXT", nullable: false),
+                    Telefono = table.Column<string>(type: "TEXT", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Productos",
                 columns: table => new
                 {
@@ -43,6 +61,11 @@ namespace CotizaHoyAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "Id", "ApellidoMaterno", "ApellidoPaterno", "CorreoElectronico", "Direccion", "Nombres", "Telefono" },
+                values: new object[] { 1, "Figueroa", "Figueroa", "jfigueroa.beltran@gmail.com", "Campo 5", "Jesus", "6645400921" });
+
+            migrationBuilder.InsertData(
                 table: "Productos",
                 columns: new[] { "Id", "Marca", "Nombre", "Precio" },
                 values: new object[] { 1, "Sabritas", "Paquetaxos", 15m });
@@ -50,12 +73,15 @@ namespace CotizaHoyAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "LastName", "Password", "Username", "isActive" },
-                values: new object[] { 1, "Jesus", "Figueroa", "$2a$11$I1btW/n56fVea4oq2sM1I.4JrAqJd3U7SSPqsPQhP5BCyE3d4j6lO", "jfigueroa.beltran@gmail.com", false });
+                values: new object[] { 1, "Jesus", "Figueroa", "$2a$11$ACmog4l3E60GUBxou.et8u9vS6UESE6Xxsctyk4D/7ACc2BEpAMLa", "jfigueroa.beltran@gmail.com", false });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Clientes");
+
             migrationBuilder.DropTable(
                 name: "Productos");
 

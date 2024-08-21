@@ -1,7 +1,8 @@
-﻿using DotNet8WebAPI.Model;
+﻿using DotNet8WebAPI;
+using DotNet8WebAPI.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace DotNet8WebAPI.Services
+namespace CotizaHoyAPI.Services.Productos
 {
     public class ProductosService : IProductosService
     {
@@ -12,7 +13,7 @@ namespace DotNet8WebAPI.Services
         }
         public async Task<List<Producto>> GetAll()
         {
-          
+
             return await _db.Productos.ToListAsync();
         }
 

@@ -1,6 +1,6 @@
 ﻿using DotNet8WebAPI.Model;
 
-namespace DotNet8WebAPI.Services
+namespace CotizaHoyAPI.Services.Productos
 {
     public interface IProductosService
     {
