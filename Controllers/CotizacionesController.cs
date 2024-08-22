@@ -37,9 +37,11 @@ namespace DotNet8WebAPI.Controllers
 
         // GET api/<ProductosController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            var data =  _Service.GetByID(id);
+            return Ok(data);
+            
         }
 
         // POST api/<ProductosController>
