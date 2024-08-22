@@ -10,7 +10,7 @@
 
         public AuthenticateResponse(User user, string token)
         {
-            //Id = user.Id;
+            Id = user.Id;
             FirstName = user.FirstName;
             LastName = user.LastName;
             Username = user.Username;
