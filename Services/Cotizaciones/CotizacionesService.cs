@@ -19,10 +19,10 @@ namespace CotizaHoyAPI.Services.Cotizaciones
             return await _db.Cotizaciones.ToListAsync();
         }
 
-        //public async Task<DotNet8WebAPI.Model.Cotizaciones?> GetByID(int id)
-        //{
-        //    return await _db.Cotizaciones.FirstOrDefaultAsync(prod => prod.Id == id);
-        //}
+        public async Task<DotNet8WebAPI.Model.Cotizaciones?> GetByID(int id)
+        {
+            return await _db.Cotizaciones.FirstOrDefaultAsync(prod => prod.Id == id);
+        }
 
         //public async Task<DotNet8WebAPI.Model.Cotizaciones?> Add(AddUpdateCotizaciones obj)
         //{
