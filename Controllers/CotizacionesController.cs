@@ -10,7 +10,7 @@ namespace DotNet8WebAPI.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    [Authorize]
+   // [Authorize]
     public class CotizacionesController : ControllerBase
     {
         // GET: api/<ProductosController>
