@@ -37,10 +37,10 @@ namespace DotNet8WebAPI.Controllers
 
         // GET api/<ProductosController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult<Cotizaciones>> Get(int id)
         {
             var data =  _Service.GetByID(id);
-            return data;
+            return Ok(data);
             
         }
 
