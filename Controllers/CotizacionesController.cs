@@ -40,7 +40,7 @@ namespace DotNet8WebAPI.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var data =  _Service.GetByID(id);
-            return Ok(data);
+            return data;
             
         }
 
