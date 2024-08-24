@@ -19,11 +19,23 @@ namespace CotizaHoyAPI.Services.Cotizaciones
             return await _db.Cotizaciones.ToListAsync();
         }
 
-        public async Task<DotNet8WebAPI.Model.Cotizaciones?> GetByID(int id)
+        //public async Task<DotNet8WebAPI.Model.Cotizaciones?> GetByID(int id)
+        //{
+         //   return await _db.Cotizaciones.FirstOrDefaultAsync(prod => prod.Id == id);
+       // }
+     public async Task<otNet8WebAPI.Model.Cotizaciones?> GetByID(int id)
         {
-            return await _db.Cotizaciones.FirstOrDefaultAsync(prod => prod.Id == id);
+            try
+            {
+                var cotizaciones = await _db.Cotizaciones.FirstOrDefaultAsync(prod => prod.Id == id);
+                return cotizaciones;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while fetching  patient from the database");
+            }
+            return null;
         }
-
         //public async Task<DotNet8WebAPI.Model.Cotizaciones?> Add(AddUpdateCotizaciones obj)
         //{
         //    var addHero = new DotNet8WebAPI.Model.Cotizaciones()
