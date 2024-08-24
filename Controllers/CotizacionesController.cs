@@ -36,24 +36,18 @@ namespace DotNet8WebAPI.Controllers
             return Ok(data);
         }
 
-             [HttpGet("GetById")]
-            [ProducesResponseType(typeof(ActionResult<Cotizaciones>), StatusCodes.Status200OK)]
-            [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            public async Task<ActionResult<Cotizaciones>> Get(int id)
+         [HttpGet("{id}")]
+        //[Route("{id}")] // /api/OurHero/:id
+        public async Task<IActionResult> Get(int id)
+        {
+            var data =  _Service.GetByID(id);
+            if (data == null)
             {
-                 var doctor =  _Service.GetByID(id);
-                //var doctor = await _doctorRepo.Get(doctorID);
-                try
-                {
-                    if (doctor != null)
-                        return Ok(doctor);
-                    return NotFound();
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest("Not able to get doctor detail based on ID");
-                }
+                return NotFound();
             }
+            return Ok(data);
+        }
+            
         
         // POST api/<ProductosController>
         [HttpPost]
