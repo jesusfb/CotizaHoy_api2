@@ -23,20 +23,25 @@ namespace CotizaHoyAPI.Services.Cotizaciones
         {
            return await _db.Cotizaciones.FirstOrDefaultAsync(prod => prod.Id == id);
         }
-    
-        //public async Task<DotNet8WebAPI.Model.Cotizaciones?> Add(AddUpdateCotizaciones obj)
-        //{
-        //    var addHero = new DotNet8WebAPI.Model.Cotizaciones()
-        //    {
-        //        Nombres = obj.Nombres,
-        //        ApellidoPaterno = obj.ApellidoPaterno,
-        //        ApellidoMaterno = obj.ApellidoMaterno,
-        //    };
 
-        //    _db.Cotizaciones.Add(addHero);
-        //    var result = await _db.SaveChangesAsync();
-        //    return result >= 0 ? addHero : null;
-        //}
+        public async Task<DotNet8WebAPI.Model.Cotizaciones?> Add(AddUpdateCotizaciones obj)
+        {
+            var addHero = new DotNet8WebAPI.Model.Cotizaciones()
+            {
+                ClienteFk = obj.ClienteFk,
+                ProductoFk = obj.ProductoFk,
+                Cantidad = obj.Cantidad,
+                Precio = obj.Precio,
+                CostoTotal = obj.CostoTotal,    
+                Iva = obj.Iva,
+                Fecha = obj.Fecha,
+          
+            };
+
+            _db.Cotizaciones.Add(addHero);
+            var result = await _db.SaveChangesAsync();
+            return result >= 0 ? addHero : null;
+        }
 
         //public async Task<DotNet8WebAPI.Model.Clientes?> Update(int id, AddUpdateClientes obj)
         //{

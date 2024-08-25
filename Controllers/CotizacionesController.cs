@@ -69,10 +69,21 @@ namespace DotNet8WebAPI.Controllers
         }
 
 
-        // POST api/<ProductosController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] AddUpdateCotizaciones heroObject)
         {
+            var hero = await _Service.Add(heroObject);
+
+            if (hero == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(new
+            {
+                message = "Super Hero Created Successfully!!!",
+                id = hero!.Id
+            });
         }
 
         // PUT api/<ProductosController>/5
