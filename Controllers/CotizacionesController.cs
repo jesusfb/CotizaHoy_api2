@@ -3,6 +3,7 @@ using CotizaHoyAPI.Services.Cotizaciones;
 using DotNet8WebAPI.Helpers;
 using DotNet8WebAPI.Model;
 using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,17 +37,36 @@ namespace DotNet8WebAPI.Controllers
             return Ok(data);
         }
 
-         [HttpGet("{id}")]
-        //[Route("{id}")] // /api/OurHero/:id
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("GetById")]
+        [ProducesResponseType(typeof(ActionResult<Cotizaciones>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Cotizaciones>> Get(int id)
         {
-            var data =  _Service.GetByID(id);
-            if (data == null)
+            var data = await _Service.GetByID(id);
+            try
             {
+                if (data != null)
+                    return Ok(data);
                 return NotFound();
             }
-            return Ok(data);
+            catch (Exception ex)
+            {
+                return BadRequest("Not able to get doctor detail based on ID");
+            }
         }
+
+
+        //[HttpGet("{id}")]
+        ////[Route("{id}")] // /api/OurHero/:id
+        //public async Task<IActionResult> Get(int id)
+        //{
+        //    var data = await _Service.GetByID(id);
+        //    if (data == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(data);
+        //}
             
         
         // POST api/<ProductosController>
