@@ -17,6 +17,42 @@ namespace CotizaHoyAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
 
+            modelBuilder.Entity("CotizaHoyAPI.Model.vCotizaciones", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("mediumtext");
+
+                    b.Property<double>("Cantidad")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("CostoTotal")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Iva")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NombreCliente")
+                        .HasMaxLength(256)
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NombreProducto")
+                        .HasMaxLength(256)
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Precio")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id")
+                        .HasName("PRIMARY");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("vCotizaciones", (string)null);
+                });
+
             modelBuilder.Entity("DotNet8WebAPI.Model.Clientes", b =>
                 {
                     b.Property<int>("Id")
@@ -102,7 +138,7 @@ namespace CotizaHoyAPI.Migrations
                             Cantidad = 1.0,
                             ClienteFk = 1,
                             CostoTotal = 444m,
-                            Fecha = new DateTime(2024, 8, 21, 16, 3, 56, 574, DateTimeKind.Local).AddTicks(5843),
+                            Fecha = new DateTime(2024, 8, 25, 23, 15, 1, 338, DateTimeKind.Local).AddTicks(7201),
                             Iva = true,
                             Precio = 444m,
                             ProductoFk = 1
@@ -174,7 +210,7 @@ namespace CotizaHoyAPI.Migrations
                             Id = 1,
                             FirstName = "Jesus",
                             LastName = "Figueroa",
-                            Password = "$2a$11$9Gn7zaih9LkS9isEPl1jyOdSrbvWFvQSYlUPGoxegGjJv6I91jyNS",
+                            Password = "$2a$11$.VDjrCaXGxR2k4mtUgc5H.lrsnBTTmEa7FjipBgyUYTNwI.zwBViO",
                             Username = "jfigueroa.beltran@gmail.com",
                             isActive = false
                         });

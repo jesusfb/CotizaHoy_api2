@@ -88,7 +88,7 @@ namespace CotizaHoyAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Cotizaciones",
                 columns: new[] { "Id", "Cantidad", "ClienteFk", "CostoTotal", "Fecha", "Iva", "Precio", "ProductoFk" },
-                values: new object[] { 1, 1.0, 1, 444m, new DateTime(2024, 8, 21, 16, 3, 56, 574, DateTimeKind.Local).AddTicks(5843), true, 444m, 1 });
+                values: new object[] { 1, 1.0, 1, 444m, new DateTime(2024, 8, 25, 23, 15, 1, 338, DateTimeKind.Local).AddTicks(7201), true, 444m, 1 });
 
             migrationBuilder.InsertData(
                 table: "Productos",
@@ -98,8 +98,13 @@ namespace CotizaHoyAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "LastName", "Password", "Username", "isActive" },
-                values: new object[] { 1, "Jesus", "Figueroa", "$2a$11$9Gn7zaih9LkS9isEPl1jyOdSrbvWFvQSYlUPGoxegGjJv6I91jyNS", "jfigueroa.beltran@gmail.com", false });
+                values: new object[] { 1, "Jesus", "Figueroa", "$2a$11$.VDjrCaXGxR2k4mtUgc5H.lrsnBTTmEa7FjipBgyUYTNwI.zwBViO", "jfigueroa.beltran@gmail.com", false });
+           
+            migrationBuilder.Sql("CREATE VIEW vCotizaciones AS SELECT c.Id,cl.Nombres NombreCliente,p.Nombre NombreProducto,c.Cantidad,c.Precio,c.CostoTotal FROM Cotizaciones c INNER JOIN Clientes cl ON cl.Id = c.ClienteFk JOIN Productos p ON p.Id = c.ProductoFk;");
+
         }
+
+    
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -115,6 +120,8 @@ namespace CotizaHoyAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
         }
+
     }
 }

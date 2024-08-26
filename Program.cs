@@ -36,6 +36,8 @@ builder.Services.AddScoped<IProductosService, ProductosService>();
 builder.Services.AddScoped<IClientesService, ClientesService>();
 builder.Services.AddScoped<ICotizacionesService, CotizacionesService>();
 
+builder.Services.AddScoped<IvCotizacionesService, vCotizacionesService>();
+
 
 
 

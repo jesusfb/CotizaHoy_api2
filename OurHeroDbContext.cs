@@ -1,5 +1,7 @@
 ﻿using DotNet8WebAPI.Model;
+using CotizaHoyAPI.Model;
 using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 
 namespace DotNet8WebAPI
 {
@@ -15,7 +17,7 @@ namespace DotNet8WebAPI
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Clientes> Clientes { get; set; }
         public DbSet<Cotizaciones> Cotizaciones { get; set; }
-        
+        public DbSet<vCotizaciones> vCotizaciones { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -69,20 +71,22 @@ namespace DotNet8WebAPI
 
               });
 
-            //modelBuilder.Entity<VAlumnosProgramaPromocion>(entity =>
-            //{
-            //    entity.HasKey(e => e.AlumnoFk)
-            //  .HasName("PRIMARY");
 
-            //    entity.ToView("vAlumnosProgramaPromocion");
-            //    entity.Property(e => e.AlumnoNombre).HasColumnType("mediumtext");
-            //    entity.Property(e => e.CorreoElectronico).HasMaxLength(256);
-            //    entity.Property(e => e.Matricula).HasMaxLength(50);
-            //    entity.Property(e => e.ProgramaNombre).HasColumnType("text");
-            //    entity.Property(e => e.ProgramaNombreCorto).HasColumnType("text");
-            //    entity.Property(e => e.ProgramaPromocionNombre).HasColumnType("text");
-            //    entity.Property(e => e.PromocionNombre).HasColumnType("text");
-            //});
+       
+            modelBuilder.Entity<vCotizaciones>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+              .HasName("PRIMARY");
+
+                entity.ToView("vCotizaciones");
+                entity.Property(e => e.Id).HasColumnType("mediumtext");
+                entity.Property(e => e.NombreCliente).HasMaxLength(256);
+                entity.Property(e => e.NombreProducto).HasMaxLength(256);
+                entity.Property(e => e.Cantidad).HasColumnType("text");
+                entity.Property(e => e.Precio).HasColumnType("text");
+                entity.Property(e => e.CostoTotal).HasColumnType("text");
+              
+            });
 
         }
 
