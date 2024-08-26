@@ -86,16 +86,23 @@ namespace DotNet8WebAPI.Controllers
             });
         }
 
-        // PUT api/<ProductosController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
         // DELETE api/<ProductosController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+
+            var hero = await _Service.DeleteByID(id);
+
+            if (hero == false)
+            {
+                return BadRequest();
+            }
+
+            return Ok(new
+            {
+                message = "Cotizacion deleted Successfully!!!"
+               
+            });
         }
     }
 }

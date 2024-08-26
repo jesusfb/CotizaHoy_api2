@@ -58,17 +58,17 @@ namespace CotizaHoyAPI.Services.Cotizaciones
         //    return null;
         //}
 
-        //public async Task<bool> DeleteByID(int id)
-        //{
-        //    var hero = await _db.Clientes.FirstOrDefaultAsync(index => index.Id == id);
-        //    if (hero != null)
-        //    {
-        //        _db.Clientes.Remove(hero);
-        //        var result = await _db.SaveChangesAsync();
-        //        return result >= 0;
-        //    }
-        //    return false;
-        //}
+        public async Task<bool> DeleteByID(int id)
+        {
+            var hero = await _db.Cotizaciones.FirstOrDefaultAsync(index => index.Id == id);
+            if (hero != null)
+            {
+                _db.Cotizaciones.Remove(hero);
+                var result = await _db.SaveChangesAsync();
+                return result >= 0;
+            }
+            return false;
+        }
 
     }
 }
