@@ -43,20 +43,23 @@ namespace CotizaHoyAPI.Services.Cotizaciones
             return result >= 0 ? addHero : null;
         }
 
-        //public async Task<DotNet8WebAPI.Model.Clientes?> Update(int id, AddUpdateClientes obj)
-        //{
-        //    var hero = await _db.Clientes.FirstOrDefaultAsync(index => index.Id == id);
-        //    if (hero != null)
-        //    {
-        //        hero.Nombres = obj.Nombres;
-        //        hero.ApellidoPaterno = obj.ApellidoPaterno;
-        //        hero.ApellidoMaterno = obj.ApellidoMaterno;
+        public async Task<DotNet8WebAPI.Model.Cotizaciones?> Update(int id, AddUpdateCotizaciones obj)
+        {
+            var hero = await _db.Cotizaciones.FirstOrDefaultAsync(index => index.Id == id);
+            if (hero != null)
+            {
+                hero.ClienteFk = obj.ClienteFk;
+                hero.ClienteFk = obj.ClienteFk;
+                hero.Precio = obj.Precio;
+                hero.Cantidad = obj.Cantidad;
+                hero.CostoTotal = obj.CostoTotal;
+              
 
-        //        var result = await _db.SaveChangesAsync();
-        //        return result >= 0 ? hero : null;
-        //    }
-        //    return null;
-        //}
+                var result = await _db.SaveChangesAsync();
+                return result >= 0 ? hero : null;
+            }
+            return null;
+        }
 
         public async Task<bool> DeleteByID(int id)
         {
